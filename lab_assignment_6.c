@@ -1,9 +1,26 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int search(int numbers[], int low, int high, int value) 
 {
+	// terminating condition
+	if(high >= low)
+	{
+		int mid = (low + high)/2;
+		// return position when found
+		if(numbers[mid] == value)
+			return mid;
+		// if number at mid index is greater, recursively call for mid+1 as new high
+		else if(numbers[mid] > value)
+			return search(numbers, low, mid-1, value);
+		// if number at mid index is less, recursively call for low as mid-1
+		else if(numbers[mid] < value)
+			return search(numbers, mid+1, high, value);
+	}	
+	
+	// number not found
 	return -1;
-}
+}	
 
 void printArray(int numbers[], int sz)
 {
